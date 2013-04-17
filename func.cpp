@@ -2,12 +2,13 @@
 Polynom::Polynom(int a):
     n(a), x(0)
 {
-    double *x=NULL;
-    x=new double[n];
+    x=NULL;
+    x=new double[n+1];
 };
 Polynom::~Polynom()
 {
     delete[]x;
+    x=0;
 }
 Polynom::Polynom(const Polynom& org): // конструктор копирования
     n(org.n), x(0)
@@ -35,9 +36,9 @@ ostream& operator<<(ostream &out ,const Polynom &a)
     }
     return out;
 }
-Polynom Polynom::operator*( Polynom &ar)
+Polynom Polynom::operator*(const Polynom&ar)
 {
-    Polynom temp(n+ar.n);
+    Polynom temp(n+ar.n-1);
     for(int i=n; i>=0; --i)
     {
         for(int j=ar.n; j>=0; --j)
@@ -53,19 +54,26 @@ Polynom &Polynom::operator=(const Polynom &org)
         return *this;
     delete [] x;
     n=org.n;
-    double *x=NULL;
-    x=new double[n];
-    for(int i=0; i<n; ++i)
+   // double *x=NULL;
+    x=new double[n+1];
+    for(int i=0; i<n+1; ++i)
         x[i]=org.x[i];
     return *this;
 }
+
 Polynom Polynom::operator+(const Polynom &sum)
 {
-    Polynom temp(n+1);
+    Polynom temp(n);
     int i, j;
+    if(n==sum.n)
+    {
+        for(i=0; i<sum.n+1; ++i)
+            temp.x[i]=x[i]+sum.x[i];
+
+    }
     if(n>sum.n)
     {
-    Polynom temp(n+1);
+       // Polynom temp(n+1);
         for(i=0; i<sum.n+1; i++)
         {
             temp.x[i]=x[i]+sum.x[i];
@@ -76,10 +84,10 @@ Polynom Polynom::operator+(const Polynom &sum)
         }
 
     }
-    else
+    if(n<sum.n)
     {
-       Polynom temp(sum.n+1);
-       for( i=0; i<n+1; i++)
+       // Polynom temp(sum.n);
+        for( i=0; i<n+1; i++)
         {
             temp.x[i]=x[i]+sum.x[i];
         }
@@ -93,11 +101,11 @@ Polynom Polynom::operator+(const Polynom &sum)
     return temp;
 }
 
-Polynom Polynom::proizvodnaya (Polynom ar )
+Polynom Polynom::proizvodnaya (Polynom ar)
 {
-    int  k=n;
-    Polynom result(k);
-     int j=n;
+
+    Polynom result(n);
+    int j=n;
     for ( int i=n-1; i>=0; --i)
     {
         result.x[i]=ar.x[j]*j;
@@ -105,4 +113,24 @@ Polynom Polynom::proizvodnaya (Polynom ar )
     }
     return result;
 }
+Polynom Polynom::integral (Polynom ar )
+{
+    Polynom result(n+2);
+    int j=n;
+    for ( int i=n+1; i>=0; --i)
+    {
+        if(i==0)
+        {
+            result.x[i]=0;
+        }
+        else
+        {
+            result.x[i]=ar.x[j]/(j+1);
+            --j ;
+        }
+    }
+
+    return result;
+}
+
 

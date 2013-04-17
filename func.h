@@ -13,14 +13,13 @@ public:
     ~ Polynom();
     Polynom(const Polynom &org); //конструктор копирования
     Polynom operator+(const Polynom &sum);
-    Polynom operator*(Polynom &);
+    Polynom operator*(const Polynom &ar);
     Polynom proizvodnaya (Polynom ar);
+    Polynom integral (Polynom ar);
     Polynom & operator=(const Polynom &org);
     friend ostream& operator<<(ostream &out ,const Polynom &a);
     friend istream& operator>>(istream& in,Polynom &a);
 
 };
-
-
 
 #endif
