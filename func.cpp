@@ -31,8 +31,8 @@ ostream& operator<<(ostream &out ,const Polynom &a)
 {
     for ( int i =a.n-1; i >= 0; i-- )
     {
-        out << a.x[i];
-        if (i!=0) cout << "*x^" << i <<" + ";
+            out << a.x[i];
+            if (i!=0) cout << "*x^" << i <<" + ";
     }
     return out;
 }
@@ -54,7 +54,7 @@ Polynom &Polynom::operator=(const Polynom &org)
         return *this;
     delete [] x;
     n=org.n;
-   // double *x=NULL;
+    // double *x=NULL;
     x=new double[n+1];
     for(int i=0; i<n+1; ++i)
         x[i]=org.x[i];
@@ -73,7 +73,7 @@ Polynom Polynom::operator+(const Polynom &sum)
     }
     if(n>sum.n)
     {
-       // Polynom temp(n+1);
+        // Polynom temp(n+1);
         for(i=0; i<sum.n+1; i++)
         {
             temp.x[i]=x[i]+sum.x[i];
@@ -86,7 +86,7 @@ Polynom Polynom::operator+(const Polynom &sum)
     }
     if(n<sum.n)
     {
-       // Polynom temp(sum.n);
+        // Polynom temp(sum.n);
         for( i=0; i<n+1; i++)
         {
             temp.x[i]=x[i]+sum.x[i];
@@ -101,10 +101,10 @@ Polynom Polynom::operator+(const Polynom &sum)
     return temp;
 }
 
-Polynom Polynom::proizvodnaya (Polynom ar)
+Polynom Polynom::proizvodnaya (const Polynom &ar)
 {
 
-    Polynom result(n);
+    Polynom result(n-1);
     int j=n;
     for ( int i=n-1; i>=0; --i)
     {
@@ -113,9 +113,9 @@ Polynom Polynom::proizvodnaya (Polynom ar)
     }
     return result;
 }
-Polynom Polynom::integral (Polynom ar )
+Polynom Polynom::integral (const Polynom &ar )
 {
-    Polynom result(n+2);
+    Polynom result(n+1);
     int j=n;
     for ( int i=n+1; i>=0; --i)
     {

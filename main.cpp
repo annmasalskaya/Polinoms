@@ -22,12 +22,13 @@ int main()
     c=a*b;
     cout<<"Произведение 2-х полиномов"<<endl;
     cout<<c<<endl<<endl;
-    cout<<"Производная от первого "<<endl;
-    a.proizvodnaya(a);
-    cout<<a;
-    cout<<"Интеграл от первого "<<endl;
-    a.integral(a);
-    cout<<a;
+    Polynom d=a.proizvodnaya(a);
+    cout<<"Производная от первого полинома "<<endl;
+    cout<<d<<endl<<endl;
+    Polynom e=a.integral(a);
+    cout<<"Интеграл от первого полинома "<<endl;
+    cout<<e<<",где 0=const"<<endl<<endl<<endl;
+
 
     return 0;
 }
